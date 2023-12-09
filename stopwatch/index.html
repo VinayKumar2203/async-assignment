@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #num{
+            display: flex;
+        }
+         
+        .btn button{
+           background-color: red;
+           color: white;
+           cursor: pointer;
+        }
+        .btn button:hover{
+            border: white;
+        }
+    </style>
+</head>
+<body>
+   <div class="main">
+    <h1>StopWatch</h1>
+        <div id="num">
+            <h2 id="hr">00</h2>
+            <h2>:</h2>
+            <h2 id="mint">00</h2>
+            <h2>:</h2>
+            <h2 id="sec">00 </h2>
+            <h2>:</h2>
+            <h2 id="milli">00</h2>
+        </div>
+
+        <div class="btn">
+            <button onclick="start()">start </button>
+            <button onclick="stop()">stop</button>
+            <button onclick="reset()">reset</button>
+        </div>
+   </div>
+</body>
+</html>
+<script>
+    let hr=0;
+    let mint=0;
+    let sec=0;
+    let milli=0;
+    let timer=false;
+   
+    function start() {
+        timer = true;
+        myStart();
+
+        // console.log("start");
+    };
+    function stop() {
+        timer=false
+        // myStart(); 
+        // console.log("stop");
+    };
+    function reset() {
+        // console.log("reset");
+        location.reload();
+    };
+
+    function myStart() {
+        if (timer) {
+            milli=milli+1;
+            if (milli==100) {
+                sec=sec+1;
+                milli=0;
+            }
+            if (sec==60) {
+                mint+=1;
+                sec=0;
+            }
+            if(mint==60){
+                hr+=1;
+                mint=0;
+            }
+            setTimeout('myStart()', 10);
+
+            let sec1=sec;
+            let mint1=mint;
+            let hr1=hr;
+            if (sec<10) {
+                sec1="0"+sec
+            }
+            if (mint<10) {
+                mint1="0"+mint
+            }
+            if (hr<10) {
+                hr1="0"+hr
+            }
+            document.getElementById("milli").innerText=milli;
+            document.getElementById("sec").innerText=sec1;
+            document.getElementById("mint").innerText=mint1;
+            document.getElementById("hr").innerText=hr1;
+        }
+       
+    }
+    </script>
